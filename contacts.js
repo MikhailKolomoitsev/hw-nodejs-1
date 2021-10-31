@@ -11,13 +11,13 @@ const listContacts = async () => {
 
 const getContactById = async (contactId) => {
     const contacts = await listContacts()
-    const [result] = contacts.filter(contact => contact.id === contactId)
-    return reuslt
+    const [result] = contacts.filter(contact => contact.id === +contactId)
+    return result
 }
 
 const removeContact = async (contactId) => {
     const contacts = await listContacts()
-    const result = contacts.filter(contact => contact.id !== contactId)
+    const result = contacts.filter(contact => contact.id !== +contactId)
     await fs.writeFile(contactsPath, JSON.stringify(result, null, 2),)
     return result
 }

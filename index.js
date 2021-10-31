@@ -5,6 +5,7 @@ const {
     removeContact,
 } = require("./contacts.js");
 const { Command } = require('commander');
+const chalk = require("chalk");
 
 const program = new Command();
 program
@@ -20,10 +21,11 @@ const argv = program.opts();
 
 
 // TODO: рефакторить
-async function invokeAction({ action, id, name, email, phone }) {
+(async ({ action, id, name, email, phone })=>{
 try{    switch (action) {
         case 'list':
-            const contacts=await listContacts()
+        const contacts = await listContacts()
+        console.table(contacts);
             break;
 
         case 'get':
@@ -49,7 +51,6 @@ try{    switch (action) {
 } catch (error) {
     console.log(error.message);
 }
-}
+})(argv)
 
-invokeAction(argv);
 
